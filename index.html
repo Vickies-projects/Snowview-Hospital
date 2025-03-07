@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Snowview Hospital</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="about.jpg" type="image">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Snowview Hospital</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="symptom-checker.html">Symptom Checker</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="appointment.html">Book Appointment</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="hero">
+        <h2>Your Health, Our Priority</h2>
+        <p>Providing top-quality healthcare services with compassion and expertise.</p>
+        <a href="services.html" class="btn">Explore Services</a>
+    </section>
+    
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>✔ Emergency Care - 24/7 support</li>
+            <li>✔ Inpatient Services - Comfortable & advanced medical facilities</li>
+            <li>✔ Outpatient Services - Efficient diagnosis and treatment</li>
+            <li>✔ Specialty Care - Expert care for various medical conditions</li>
+            <li>✔ Pediatric Care - Comprehensive health services for children</li>
+            <li>✔ Maternity Services - Expert care for mothers and newborns</li>
+        </ul>
+    </section>
+    
+    <section id="departments">
+        <h2>Our Departments</h2>
+        <p>We offer specialized medical care across multiple departments:</p>
+        <ul>
+            <li><strong>Cardiology:</strong> Advanced heart care and treatments.</li>
+            <li><strong>Neurology:</strong> Expert care for brain and nervous system disorders.</li>
+            <li><strong>Orthopedics:</strong> Treatment for bone and joint conditions.</li>
+            <li><strong>Radiology:</strong> Cutting-edge diagnostic imaging services.</li>
+        </ul>
+    </section>
+    
+    <section id="appointment">
+        <h2>Book an Appointment</h2>
+        <p>Schedule your appointment with our expert doctors online.</p>
+        <a href="appointment.html" class="btn">Schedule an Appointment</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Snowview Hospital. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        const newsAlerts = [
+            { message: "Snowview Hospital introduces a new MRI scanning facility!", image: "mri.jpg" },
+            { message: "Free community health check-up camp successfully organized!", image: "health-camp.jpg" },
+            { message: "Welcome our new team of specialized cardiologists!", image: "cardiologists.jpg" }
+        ];
+
+        function showNewsPopup() {
+            const randomAlert = newsAlerts[Math.floor(Math.random() * newsAlerts.length)];
+            const popup = document.createElement("div");
+            popup.className = "news-popup";
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <img src="images/${randomAlert.image}" alt="News Image">
+                    <p>${randomAlert.message}</p>
+                    <button onclick="this.parentElement.parentElement.remove()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        setInterval(showNewsPopup, 10000); // Show news popup every 10 seconds
+    </script>
+</body>
+</html>

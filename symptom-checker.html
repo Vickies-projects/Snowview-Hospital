@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker - Snowview Hospital</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="about.jpg" type="image">
+</head>
+<body>
+    <header>
+        <h1>Symptom Checker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="appointment.html">Book Appointment</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="symptom-checker">
+        <h2>Check Your Symptoms</h2>
+        <form id="symptom-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="location">Where are you from?</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="pain-location">Where is the pain?</label>
+            <input type="text" id="pain-location" name="pain-location" required>
+            
+            <label for="duration">How long have you had the pain?</label>
+            <input type="text" id="duration" name="duration" required>
+            
+            <button type="button" onclick="searchDisease()">Check Symptoms</button>
+        </form>
+        <p id="recommendation"></p>
+        <div id="doctor-contact" style="display: none;">
+            <h3>Recommended Doctor</h3>
+            <p id="doctor-info"></p>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Find a Doctor</h2>
+        <p>If you need a doctor, visit our <a href="find-doctor.html">Find a Doctor</a> page to get more details on specialists available at Snowview Hospital.</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Snowview Hospital. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function searchDisease() {
+            let painLocation = document.getElementById("pain-location").value.toLowerCase();
+            let duration = document.getElementById("duration").value;
+            let searchQuery = `common diseases causing ${painLocation} pain for ${duration}`;
+            
+            let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+            window.open(searchUrl, '_blank');
+            
+            let criticalSymptoms = ["severe", "chest", "unbearable", "breathing difficulty", "fainting"];
+            let isCritical = criticalSymptoms.some(symptom => painLocation.includes(symptom));
+            
+            if (isCritical) {
+                document.getElementById("recommendation").innerHTML = "Your symptoms might be critical. Please see a doctor immediately!";
+                displayDoctorInfo(painLocation);
+            } else {
+                document.getElementById("recommendation").innerHTML = "Check the search results for possible conditions and recommendations.";
+            }
+        }
+
+        function displayDoctorInfo(painLocation) {
+            let doctorDetails = {
+                "tooth": "Dr. James Smith - Dentist | Available: Mon-Fri 9 AM - 5 PM | Contact: +123456789",
+                "chest": "Dr. Laura Adams - Cardiologist | Available: Mon-Sat 10 AM - 6 PM | Contact: +987654321",
+                "head": "Dr. Kevin Johnson - Neurologist | Available: Tue-Thu 8 AM - 3 PM | Contact: +1122334455",
+                "stomach": "Dr. Emily Brown - Gastroenterologist | Available: Mon-Fri 9 AM - 4 PM | Contact: +6677889900"
+            };
+            
+            for (let key in doctorDetails) {
+                if (painLocation.includes(key)) {
+                    document.getElementById("doctor-info").innerHTML = doctorDetails[key];
+                    document.getElementById("doctor-contact").style.display = "block";
+                    return;
+                }
+            }
+            document.getElementById("doctor-contact").style.display = "none";
+        }
+    </script>
+</body>
+</html>

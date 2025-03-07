@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link rel="icon" href="about.jpg" type="image">
+</head>
+<body>
+    <header>
+        <h1>Snowview Hospital</h1>
+        <h1>Our Medical Services</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="symptom-checker.html">Symptom Checker</a></li>
+                <li><a href="departments.html">Departments</a></li>
+
+            </ul>
+        </nav>
+           </header>
+    
+    <section id="services">
+        <h2>Click on a Service to Learn More</h2>
+        <div class="service" onclick="toggleDetails('cardiology')">
+            <h3>Cardiology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('neurology')">
+            <h3>Neurology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('gastroenterology')">
+            <h3>Gastroenterology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('dermatology')">
+            <h3>Dermatology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('orthopedics')">
+            <h3>Orthopedics</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('pediatrics')">
+            <h3>Pediatrics</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('ophthalmology')">
+            <h3>Ophthalmology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('ent')">
+            <h3>ENT (Ear, Nose, Throat)</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('urology')">
+            <h3>Urology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('rheumatology')">
+            <h3>Rheumatology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('psychiatry')">
+            <h3>Psychiatry</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('oncology')">
+            <h3>Oncology</h3>
+        </div>
+        <div class="service" onclick="toggleDetails('endocrinology')">
+            <h3>Endocrinology</h3>
+        </div>
+    </section>
+    
+    <section id="service-details" style="display: none;">
+        <h2 id="service-title"></h2>
+        <p id="disease-overview"></p>
+        <p id="disease-types"></p>
+        <p id="treatment"></p>
+        <p id="prevention"></p>
+        <h3 id="cost"></h3>
+    </section>
+    
+    <script>
+        const servicesInfo = {
+            "cardiology": {
+                title: "Cardiology",
+                overview: "Cardiology deals with disorders of the heart and blood vessels, including heart attacks and hypertension.",
+                types: "Types include congenital heart disease, coronary artery disease, arrhythmia, and heart failure.",
+                treatment: "Treatments include medication, lifestyle changes, surgery, and cardiac rehabilitation.",
+                prevention: "To prevent heart disease, maintain a healthy diet, exercise regularly, and avoid smoking.",
+                cost: "Treatment costs range from $500 for checkups to $20,000 for major surgeries."
+            },
+            "neurology": {
+                title: "Neurology",
+                overview: "Neurology focuses on the nervous system, treating conditions like epilepsy, migraines, and stroke.",
+                types: "Common conditions include Alzheimer's, Parkinson's, multiple sclerosis, and neuropathy.",
+                treatment: "Treatment varies from medications, therapy, surgery, and lifestyle modifications.",
+                prevention: "Brain health can be maintained with proper diet, mental exercise, and avoiding head injuries.",
+                cost: "Costs range from $200 for consultations to $15,000 for surgeries."
+            },
+            "gastroenterology": {
+                title: "Gastroenterology",
+                overview: "This field deals with digestive disorders, such as ulcers, IBS, and Crohn’s disease.",
+                types: "Types include acid reflux, gallbladder disease, inflammatory bowel disease, and hepatitis.",
+                treatment: "Treatments involve dietary changes, medication, surgery, and lifestyle adjustments.",
+                prevention: "Healthy eating, regular exercise, and avoiding alcohol help prevent digestive issues.",
+                cost: "Costs range from $150 for screening to $10,000 for advanced procedures."
+            },
+            "dermatology": {
+                "title": "Dermatology",
+                "overview": "Dermatology focuses on diagnosing and treating skin, hair, and nail conditions.",
+                "types": "Common conditions include acne, eczema, psoriasis, skin infections, and skin cancer.",
+                "treatment": "Treatments range from topical and oral medications to laser therapy, cryotherapy, and surgery.",
+                "prevention": "Preventive measures include proper skin hygiene, sun protection, hydration, and regular dermatological checkups.",
+                "cost": "Treatment costs range from $100 for consultations to $5,000 for advanced procedures like laser treatment or skin cancer removal."
+            },
+            "orthopedics": {
+                "title": "Orthopedics",
+                "overview": "Orthopedics deals with the musculoskeletal system, including bones, joints, muscles, ligaments, and tendons.",
+                "types": "Common conditions include fractures, arthritis, osteoporosis, back pain, and sports injuries.",
+                "treatment": "Treatment options include physiotherapy, medications, orthopedic surgery, and rehabilitation exercises.",
+                "prevention": "Maintaining good posture, regular exercise, a calcium-rich diet, and injury prevention strategies help maintain bone health.",
+                "cost": "Costs range from $250 for consultations to $20,000 for orthopedic surgeries like joint replacements."
+            },
+            "pediatrics": {
+                "title": "Pediatrics",
+                "overview": "Pediatrics focuses on the healthcare of infants, children, and adolescents.",
+                "types": "Common pediatric conditions include asthma, childhood infections, congenital disorders, and developmental disorders.",
+                "treatment": "Treatments vary from vaccinations, medications, nutritional guidance, and therapy.",
+                "prevention": "Preventive care includes vaccinations, regular check-ups, a balanced diet, and proper hygiene.",
+                "cost": "Costs range from $50 for routine checkups to $5,000 for specialized pediatric treatments."
+            },
+            "ophthalmology": {
+                "title": "Ophthalmology",
+                "overview": "Ophthalmology deals with eye diseases and vision care.",
+                "types": "Common eye conditions include cataracts, glaucoma, macular degeneration, and refractive errors.",
+                "treatment": "Treatments include prescription glasses, eye drops, laser therapy, and eye surgery.",
+                "prevention": "Regular eye exams, protecting eyes from UV rays, and maintaining good eye hygiene help prevent eye diseases.",
+                "cost": "Costs range from $100 for basic eye exams to $10,000 for advanced procedures like LASIK or cataract surgery."
+            },
+            "ent": {
+                "title": "ENT (Ear, Nose, Throat)",
+                "overview": "ENT specializes in disorders affecting the ear, nose, and throat.",
+                "types": "Common conditions include sinus infections, tonsillitis, hearing loss, and nasal polyps.",
+                "treatment": "Treatments range from medications and hearing aids to surgical interventions like tonsillectomy or sinus surgery.",
+                "prevention": "Proper ear hygiene, avoiding loud noise exposure, and treating allergies help prevent ENT disorders.",
+                "cost": "Costs range from $100 for consultations to $8,000 for ENT surgeries."
+            },
+            "urology": {
+                "title": "Urology",
+                "overview": "Urology focuses on diseases of the urinary tract and male reproductive system.",
+                "types": "Common conditions include urinary tract infections (UTIs), kidney stones, prostate disorders, and bladder issues.",
+                "treatment": "Treatments include medications, lifestyle changes, catheterization, and surgical procedures.",
+                "prevention": "Drinking plenty of water, practicing good hygiene, and regular checkups help prevent urinary tract disorders.",
+                "cost": "Costs range from $150 for consultations to $12,000 for major procedures like kidney stone removal."
+            },
+            "rheumatology": {
+                "title": "Rheumatology",
+                "overview": "Rheumatology deals with autoimmune and inflammatory diseases affecting joints, muscles, and bones.",
+                "types": "Common conditions include rheumatoid arthritis, lupus, gout, and osteoporosis.",
+                "treatment": "Treatments involve medications, physical therapy, and lifestyle adjustments.",
+                "prevention": "Regular exercise, a balanced diet, and early diagnosis can help prevent severe complications.",
+                "cost": "Costs range from $200 for consultations to $10,000 for long-term management."
+            },
+            "psychiatry": {
+                "title": "Psychiatry",
+                "overview": "Psychiatry focuses on mental health disorders and emotional well-being.",
+                "types": "Common disorders include depression, anxiety, bipolar disorder, and schizophrenia.",
+                "treatment": "Treatment includes therapy, counseling, medication, and sometimes hospitalization.",
+                "prevention": "Maintaining a healthy lifestyle, stress management, and seeking help early can prevent severe mental health issues.",
+                "cost": "Costs range from $100 for therapy sessions to $15,000 for intensive psychiatric care."
+            },
+            "oncology": {
+                "title": "Oncology",
+                "overview": "Oncology deals with the diagnosis and treatment of cancer.",
+                "types": "Common types include lung cancer, breast cancer, prostate cancer, and leukemia.",
+                "treatment": "Treatment options include chemotherapy, radiation therapy, surgery, and immunotherapy.",
+                "prevention": "Early screening, avoiding carcinogens, and maintaining a healthy lifestyle help reduce cancer risk.",
+                "cost": "Costs range from $1,000 for screenings to over $50,000 for advanced cancer treatment."
+            },
+            "endocrinology": {
+                "title": "Endocrinology",
+                "overview": "Endocrinology focuses on disorders related to hormones and metabolism.",
+                "types": "Common conditions include diabetes, thyroid disorders, adrenal gland disorders, and metabolic syndromes.",
+                "treatment": "Treatment includes hormone therapy, medications, lifestyle modifications, and sometimes surgery.",
+                "prevention": "A balanced diet, regular exercise, and monitoring hormone levels help prevent endocrine disorders.",
+                "cost": "Costs range from $200 for checkups to $15,000 for hormone-related surgeries."
+            }
+        };
+
+        let openDetails = []; 
+
+        function toggleDetails(serviceKey) {
+            let existingDetails = document.getElementById(`details-${serviceKey}`);
+        
+            if (existingDetails) {
+                existingDetails.remove();
+                openDetails = openDetails.filter(key => key !== serviceKey); 
+                return;
+            }
+        
+            if (openDetails.length >= 2) {
+                let oldestKey = openDetails.shift(); 
+                document.getElementById(`details-${oldestKey}`).remove();
+            }
+        
+            const service = servicesInfo[serviceKey];
+            const detailsContainer = document.createElement("div");
+            detailsContainer.id = `details-${serviceKey}`;
+            detailsContainer.classList.add("service-details");
+        
+            detailsContainer.innerHTML = `
+                <h2>${service.title}</h2>
+                <p><strong>Overview:</strong> ${service.overview}</p>
+                <p><strong>Types:</strong> ${service.types}</p>
+                <p><strong>Treatment:</strong> ${service.treatment}</p>
+                <p><strong>Prevention:</strong> ${service.prevention}</p>
+                <h3><strong>Cost:</strong> ${service.cost}</h3>
+                <form class="service-form">
+                    <h3>Book an Appointment</h3>
+                    <label for="name-${serviceKey}">Name:</label>
+                    <input type="text" id="name-${serviceKey}" name="name" required>
+                    
+                    <label for="email-${serviceKey}">Email:</label>
+                    <input type="email" id="email-${serviceKey}" name="email" required>
+                    
+                    <label for="date-${serviceKey}">Preferred Date:</label>
+                    <input type="date" id="date-${serviceKey}" name="date" required>
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            `;
+        
+            const serviceElement = document.querySelector(`[onclick="toggleDetails('${serviceKey}')"]`);
+            serviceElement.insertAdjacentElement("afterend", detailsContainer);
+        
+            openDetails.push(serviceKey);
+        }
+              
+    </script>
+</body>
+</html>
